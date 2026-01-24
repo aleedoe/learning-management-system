@@ -1,13 +1,24 @@
 /**
  * Database Configuration
- * Prisma client singleton for PostgreSQL
+ * Prisma client singleton for PostgreSQL (Prisma 7+)
  */
 
 import { PrismaClient } from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
+import { Pool } from 'pg';
 import logger from '../utils/logger';
 
-// Create Prisma client with logging
+// Create PostgreSQL connection pool
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+});
+
+// Create Prisma adapter with pg driver
+const adapter = new PrismaPg(pool);
+
+// Create Prisma client with adapter and logging
 const prisma = new PrismaClient({
+    adapter,
     log: [
         { level: 'query', emit: 'event' },
         { level: 'error', emit: 'event' },
