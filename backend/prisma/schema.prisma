@@ -60,7 +60,7 @@ model User {
   // Relations
   instructorProfile InstructorProfile?
   courses           Course[]           @relation("InstructorCourses")
-  purchases         Purchase[]
+  enrollments       Enrollment[]
   userProgress      UserProgress[]
   quizAttempts      QuizAttempt[]
   reviews           Review[]
@@ -81,7 +81,6 @@ model InstructorProfile {
   website       String?
   totalStudents Int      @default(0) @map("total_students")
   totalCourses  Int      @default(0) @map("total_courses")
-  totalRevenue  Decimal  @default(0) @map("total_revenue") @db.Decimal(12, 2)
   averageRating Float    @default(0) @map("average_rating")
   isVerified    Boolean  @default(false) @map("is_verified")
   createdAt     DateTime @default(now()) @map("created_at")
@@ -132,8 +131,7 @@ model Course {
   description      String?      @db.Text
   thumbnail        String?
   previewVideoUrl  String?      @map("preview_video_url")
-  price            Decimal      @default(0) @db.Decimal(10, 2)
-  discountPrice    Decimal?     @map("discount_price") @db.Decimal(10, 2)
+  enrollmentKey    String?      @map("enrollment_key") // Password for course enrollment
   level            CourseLevel  @default(ALL_LEVELS)
   status           CourseStatus @default(DRAFT)
   language         String       @default("en")
@@ -154,7 +152,7 @@ model Course {
   category    Category?    @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   modules     Module[]
   attachments Attachment[]
-  purchases   Purchase[]
+  enrollments Enrollment[]
   reviews     Review[]
 
   @@index([instructorId])
@@ -162,6 +160,7 @@ model Course {
   @@index([slug])
   @@index([status])
   @@index([isFeatured])
+  @@index([enrollmentKey])
   @@map("courses")
 }
 
@@ -335,18 +334,13 @@ model QuizAttemptAnswer {
 // STUDENT ENGAGEMENT
 // ==========================================
 
-model Purchase {
-  id            Int       @id @default(autoincrement())
-  userId        Int       @map("user_id")
-  courseId      Int       @map("course_id")
-  price         Decimal   @db.Decimal(10, 2)
-  currency      String    @default("USD")
-  paymentMethod String?   @map("payment_method")
-  paymentId     String?   @map("payment_id") // External payment reference
-  status        String    @default("completed") // pending, completed, refunded
-  refundedAt    DateTime? @map("refunded_at")
-  createdAt     DateTime  @default(now()) @map("created_at")
-  updatedAt     DateTime  @updatedAt @map("updated_at")
+model Enrollment {
+  id         Int      @id @default(autoincrement())
+  userId     Int      @map("user_id")
+  courseId   Int      @map("course_id")
+  enrolledAt DateTime @default(now()) @map("enrolled_at")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
 
   // Relations
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -355,9 +349,8 @@ model Purchase {
   @@unique([userId, courseId])
   @@index([userId])
   @@index([courseId])
-  @@index([status])
-  @@index([createdAt])
-  @@map("purchases")
+  @@index([enrolledAt])
+  @@map("enrollments")
 }
 
 model UserProgress {
@@ -412,7 +405,7 @@ model Notification {
   userId    Int       @map("user_id")
   title     String
   message   String    @db.Text
-  type      String // course_update, new_lesson, quiz_result, system
+  type      String // course_update, new_lesson, quiz_result, system, enrollment
   data      Json? // Additional metadata
   isRead    Boolean   @default(false) @map("is_read")
   readAt    DateTime? @map("read_at")
