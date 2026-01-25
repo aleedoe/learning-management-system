@@ -58,10 +58,7 @@ const updateCourseBodySchema = createCourseBodySchema.partial();
  */
 const courseIdParamsSchema = z.object({
     id: z.coerce
-        .number({
-            required_error: 'Course ID is required',
-            invalid_type_error: 'Course ID must be a number',
-        })
+        .number()
         .int('Course ID must be an integer')
         .positive('Course ID must be positive'),
 });

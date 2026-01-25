@@ -6,6 +6,7 @@
 import { Router, Request, Response } from 'express';
 import authRoutes from './auth.routes';
 import courseRoutes from './course.routes';
+import lessonRoutes from './lesson.routes';
 
 const router = Router();
 
@@ -26,6 +27,7 @@ router.get('/health', (_req: Request, res: Response) => {
 // Mount routes
 router.use('/auth', authRoutes);
 router.use('/courses', courseRoutes);
+router.use('/lessons', lessonRoutes);
 
 export default router;
 
