@@ -2,9 +2,10 @@
   "name": "learning-management-system",
   "version": "1.0.0",
   "description": "Learning Management System API Server",
-  "main": "dist/server.js",
+  "main": "dist/server.ts",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "dev": "nodemon",
+    "dev:ts-node-dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
     "prisma:generate": "prisma generate",
@@ -44,6 +45,7 @@
     "@types/swagger-ui-express": "^4.1.7",
     "nodemon": "^3.1.9",
     "prisma": "^7.3.0",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.7.3"
   }
