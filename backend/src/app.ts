@@ -18,6 +18,8 @@ import {
     errorHandler,
     notFoundHandler,
 } from './middlewares/error.middleware';
+// AppError classes available from: './utils/AppError'
+// asyncHandler wrapper available from: './utils/asyncHandler'
 
 // Create Express app
 const app = express();
