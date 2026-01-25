@@ -33,9 +33,9 @@ export function useLogin() {
             // Invalidate user query to refetch fresh data
             queryClient.invalidateQueries({ queryKey: authKeys.user() });
 
-            // Show success toast
+            // Show success toast with firstName
             toast.success('Login successful!', {
-                description: `Welcome back, ${response.user.name}!`,
+                description: `Welcome back, ${response.user.firstName}!`,
             });
 
             // Redirect based on user role
@@ -56,20 +56,30 @@ export function useLogin() {
 /**
  * Custom Hook: useRegister
  * Handles user registration with TanStack Query mutation.
+ * Automatically logs in the user after successful registration.
  */
 export function useRegister() {
     const router = useRouter();
+    const { setAuth } = useAuthStore();
+    const queryClient = useQueryClient();
 
     return useMutation({
         mutationFn: (data: RegisterInput) => authService.register(data),
         onSuccess: (response) => {
-            // Show success toast
+            // Backend returns user and token, so we auto-login the user
+            setAuth(response.user, response.token);
+
+            // Invalidate user query to refetch fresh data
+            queryClient.invalidateQueries({ queryKey: authKeys.user() });
+
+            // Show success toast with firstName
             toast.success('Registration successful!', {
-                description: `Welcome, ${response.user.name}! Please login to continue.`,
+                description: `Welcome, ${response.user.firstName}! Your account has been created.`,
             });
 
-            // Redirect to login page
-            router.push('/login');
+            // Redirect based on user role
+            const redirectPath = getRedirectPath(response.user.role);
+            router.push(redirectPath);
         },
         onError: (error: AxiosError<{ message: string }>) => {
             const message =
@@ -88,7 +98,7 @@ export function useRegister() {
  * Used for session persistence on page refresh.
  */
 export function useUser() {
-    const { setUser, logout, isAuthenticated } = useAuthStore();
+    const { setUser, logout } = useAuthStore();
 
     return useQuery({
         queryKey: authKeys.user(),

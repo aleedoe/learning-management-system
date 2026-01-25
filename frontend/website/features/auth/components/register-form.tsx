@@ -30,6 +30,8 @@ import { registerSchema, type RegisterInput, type UserRole } from '../types';
  * - Role selection
  * - Loading states
  * - Error handling with toast notifications
+ * 
+ * Updated to use firstName and lastName fields matching backend schema.prisma
  */
 export function RegisterForm() {
     const [showPassword, setShowPassword] = useState(false);
@@ -44,7 +46,8 @@ export function RegisterForm() {
     } = useForm<RegisterInput>({
         resolver: zodResolver(registerSchema),
         defaultValues: {
-            name: '',
+            firstName: '',
+            lastName: '',
             email: '',
             password: '',
             confirmPassword: '',
@@ -71,23 +74,45 @@ export function RegisterForm() {
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 <CardContent className="space-y-4">
-                    {/* Name Field */}
-                    <div className="space-y-2">
-                        <Label htmlFor="name">Full Name</Label>
-                        <Input
-                            id="name"
-                            type="text"
-                            placeholder="John Doe"
-                            autoComplete="name"
-                            disabled={isPending}
-                            {...register('name')}
-                            className={errors.name ? 'border-destructive' : ''}
-                        />
-                        {errors.name && (
-                            <p className="text-sm text-destructive">
-                                {errors.name.message}
-                            </p>
-                        )}
+                    {/* Name Fields Row */}
+                    <div className="grid grid-cols-2 gap-3">
+                        {/* First Name Field */}
+                        <div className="space-y-2">
+                            <Label htmlFor="firstName">First Name</Label>
+                            <Input
+                                id="firstName"
+                                type="text"
+                                placeholder="John"
+                                autoComplete="given-name"
+                                disabled={isPending}
+                                {...register('firstName')}
+                                className={errors.firstName ? 'border-destructive' : ''}
+                            />
+                            {errors.firstName && (
+                                <p className="text-sm text-destructive">
+                                    {errors.firstName.message}
+                                </p>
+                            )}
+                        </div>
+
+                        {/* Last Name Field */}
+                        <div className="space-y-2">
+                            <Label htmlFor="lastName">Last Name</Label>
+                            <Input
+                                id="lastName"
+                                type="text"
+                                placeholder="Doe"
+                                autoComplete="family-name"
+                                disabled={isPending}
+                                {...register('lastName')}
+                                className={errors.lastName ? 'border-destructive' : ''}
+                            />
+                            {errors.lastName && (
+                                <p className="text-sm text-destructive">
+                                    {errors.lastName.message}
+                                </p>
+                            )}
+                        </div>
                     </div>
 
                     {/* Email Field */}
@@ -120,8 +145,8 @@ export function RegisterForm() {
                                     if (input) input.click();
                                 }}
                                 className={`p-3 rounded-lg border-2 transition-all ${selectedRole === 'STUDENT'
-                                        ? 'border-primary bg-primary/5'
-                                        : 'border-muted hover:border-muted-foreground/50'
+                                    ? 'border-primary bg-primary/5'
+                                    : 'border-muted hover:border-muted-foreground/50'
                                     }`}
                             >
                                 <div className="text-sm font-medium">Learn</div>
@@ -142,8 +167,8 @@ export function RegisterForm() {
                                     if (input) input.click();
                                 }}
                                 className={`p-3 rounded-lg border-2 transition-all ${selectedRole === 'INSTRUCTOR'
-                                        ? 'border-primary bg-primary/5'
-                                        : 'border-muted hover:border-muted-foreground/50'
+                                    ? 'border-primary bg-primary/5'
+                                    : 'border-muted hover:border-muted-foreground/50'
                                     }`}
                             >
                                 <div className="text-sm font-medium">Teach</div>

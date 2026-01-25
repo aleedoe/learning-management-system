@@ -36,6 +36,7 @@ axiosInstance.interceptors.request.use(
 /**
  * Response Interceptor
  * Handles 401 Unauthorized errors globally.
+ * Clears localStorage token and Zustand auth store.
  */
 axiosInstance.interceptors.response.use(
     (response) => response,
@@ -43,7 +44,11 @@ axiosInstance.interceptors.response.use(
         if (error.response?.status === 401) {
             // Clear auth state on 401
             if (typeof window !== 'undefined') {
+                // Clear token from localStorage
                 localStorage.removeItem('token');
+
+                // Clear Zustand persisted auth storage
+                localStorage.removeItem('auth-storage');
 
                 // Redirect to login page (avoid redirect loops)
                 const currentPath = window.location.pathname;

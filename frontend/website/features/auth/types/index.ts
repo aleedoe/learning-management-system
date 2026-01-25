@@ -2,20 +2,37 @@ import { z } from 'zod';
 
 /**
  * User Role Enum
+ * Matches backend Role enum from schema.prisma
  */
 export type UserRole = 'ADMIN' | 'INSTRUCTOR' | 'STUDENT';
 
 /**
  * User Interface
- * Represents the authenticated user data.
+ * Matches backend UserDTO from auth.types.ts
+ * Derived from schema.prisma User model (excluding passwordHash)
  */
 export interface User {
     id: number;
     email: string;
-    name: string;
+    firstName: string;
+    lastName: string;
+    avatar: string | null;
     role: UserRole;
-    createdAt?: string;
-    updatedAt?: string;
+    isActive: boolean;
+    isVerified: boolean;
+    lastLoginAt: string | null;
+    createdAt: string;
+    updatedAt: string;
+}
+
+/**
+ * API Response Wrapper
+ * Standard response format from backend
+ */
+export interface ApiResponse<T> {
+    success: boolean;
+    message: string;
+    data: T;
 }
 
 /**
@@ -38,13 +55,18 @@ export type LoginInput = z.infer<typeof loginSchema>;
 /**
  * Register Input Schema
  * Zod validation for registration form.
+ * Matches backend registerSchema validator fields.
  */
 export const registerSchema = z
     .object({
-        name: z
+        firstName: z
             .string()
-            .min(1, 'Name is required')
-            .min(2, 'Name must be at least 2 characters'),
+            .min(1, 'First name is required')
+            .min(2, 'First name must be at least 2 characters'),
+        lastName: z
+            .string()
+            .min(1, 'Last name is required')
+            .min(2, 'Last name must be at least 2 characters'),
         email: z
             .string()
             .min(1, 'Email is required')
@@ -52,7 +74,7 @@ export const registerSchema = z
         password: z
             .string()
             .min(1, 'Password is required')
-            .min(6, 'Password must be at least 6 characters'),
+            .min(8, 'Password must be at least 8 characters'),
         confirmPassword: z.string().min(1, 'Please confirm your password'),
         role: z.enum(['INSTRUCTOR', 'STUDENT']).default('STUDENT'),
     })
@@ -64,28 +86,38 @@ export const registerSchema = z
 export type RegisterInput = z.infer<typeof registerSchema>;
 
 /**
+ * Auth Response Data
+ * Data payload from login/register endpoints
+ */
+export interface AuthResponseData {
+    user: User;
+    token: string;
+}
+
+/**
  * Login Response
  * Response from POST /auth/login
  */
-export interface LoginResponse {
-    token: string;
-    user: User;
-}
+export type LoginResponse = ApiResponse<AuthResponseData>;
 
 /**
  * Register Response
  * Response from POST /auth/register
  */
-export interface RegisterResponse {
-    message: string;
-    user: User;
-}
+export type RegisterResponse = ApiResponse<AuthResponseData>;
+
+/**
+ * Get Me Response
+ * Response from GET /auth/me
+ */
+export type GetMeResponse = ApiResponse<User>;
 
 /**
  * Auth Error Response
  * Error response from auth endpoints
  */
 export interface AuthErrorResponse {
+    success: boolean;
     message: string;
     errors?: Record<string, string[]>;
 }
