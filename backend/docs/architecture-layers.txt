@@ -1,0 +1,129 @@
+================================================================================
+                    BACKEND ARCHITECTURE LAYERS
+                    Learning Management System (LMS)
+================================================================================
+
+Architecture Pattern: Layered Architecture
+Technology Stack: Express.js + TypeScript + Prisma + PostgreSQL
+
+================================================================================
+                           LAYER OVERVIEW
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         PRESENTATION LAYER                                  │
+│  Directory: routes/, controllers/                                           │
+│  Purpose: API endpoints, request/response handling, HTTP routing            │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          VALIDATION LAYER                                   │
+│  Directory: validators/                                                     │
+│  Purpose: Input validation using Zod schemas                                │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                       BUSINESS LOGIC LAYER                                  │
+│  Directory: services/                                                       │
+│  Purpose: Core business logic, orchestration, domain rules                  │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        DATA ACCESS LAYER                                    │
+│  Directory: repositories/                                                   │
+│  Purpose: Database operations, Prisma queries, data persistence             │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          DATABASE LAYER                                     │
+│  Directory: prisma/                                                         │
+│  Purpose: Schema definition, migrations, PostgreSQL                         │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+================================================================================
+                       CROSS-CUTTING CONCERNS
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  MIDDLEWARE LAYER                                                           │
+│  Directory: middlewares/                                                    │
+│  Purpose: Authentication, authorization, error handling, rate limiting,    │
+│           request logging, CORS                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  CONFIGURATION LAYER                                                        │
+│  Directory: config/                                                         │
+│  Purpose: Application configuration, environment variables, database       │
+│           connection, Swagger setup                                         │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  UTILITY LAYER                                                              │
+│  Directory: utils/                                                          │
+│  Purpose: Helper functions, shared utilities, common operations             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  TYPE DEFINITIONS                                                           │
+│  Directory: types/                                                          │
+│  Purpose: TypeScript interfaces, type definitions, DTOs                     │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  CONSTANTS                                                                  │
+│  Directory: constants/                                                      │
+│  Purpose: Application constants, enums, static values                       │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+================================================================================
+                          REQUEST FLOW
+================================================================================
+
+  HTTP Request
+       │
+       ▼
+  ┌─────────┐     ┌────────────┐     ┌────────────┐     ┌──────────────┐
+  │ Routes  │ ──▶ │ Middleware │ ──▶ │ Controller │ ──▶ │  Validators  │
+  └─────────┘     └────────────┘     └────────────┘     └──────────────┘
+                                                               │
+       ┌───────────────────────────────────────────────────────┘
+       ▼
+  ┌──────────┐     ┌──────────────┐     ┌──────────┐
+  │ Services │ ──▶ │ Repositories │ ──▶ │  Prisma  │ ──▶ PostgreSQL
+  └──────────┘     └──────────────┘     └──────────┘
+       │
+       ▼
+  HTTP Response
+
+
+================================================================================
+                         DIRECTORY STRUCTURE
+================================================================================
+
+backend/
+├── src/
+│   ├── app.ts                 # Express app configuration
+│   ├── server.ts              # Server entry point
+│   ├── config/                # Configuration layer
+│   ├── constants/             # Application constants
+│   ├── controllers/           # Presentation layer (controllers)
+│   ├── middlewares/           # Middleware layer
+│   ├── repositories/          # Data access layer
+│   ├── routes/                # Presentation layer (routes)
+│   ├── services/              # Business logic layer
+│   ├── types/                 # TypeScript type definitions
+│   ├── utils/                 # Utility functions
+│   └── validators/            # Validation layer (Zod schemas)
+├── prisma/
+│   └── schema.prisma          # Database schema
+├── docs/                      # Documentation
+└── package.json               # Dependencies
+
+================================================================================

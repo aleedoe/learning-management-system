@@ -4,6 +4,7 @@
  */
 
 import { Router, Request, Response } from 'express';
+import authRoutes from './auth.routes';
 
 const router = Router();
 
@@ -21,8 +22,8 @@ router.get('/health', (_req: Request, res: Response) => {
     });
 });
 
-// Mount routes here
-// Example: router.use('/users', userRoutes);
-// Example: router.use('/courses', courseRoutes);
+// Mount routes
+router.use('/auth', authRoutes);
 
 export default router;
+
