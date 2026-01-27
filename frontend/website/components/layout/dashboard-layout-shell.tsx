@@ -16,6 +16,7 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar"
 import type { NavItem } from "@/config/app.config"
+import { ModeToggle } from "../mode-toggle"
 
 interface DashboardLayoutShellProps {
     children: React.ReactNode
@@ -30,7 +31,7 @@ export function DashboardLayoutShell({
         <SidebarProvider>
             <AppSidebar items={navItems} />
             <SidebarInset className="h-svh overflow-hidden">
-                <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 border-b">
+                <header className="flex h-16 shrink-0 items-center justify-between gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 border-b">
                     <div className="flex items-center gap-2 px-4">
                         <SidebarTrigger className="-ml-1" />
                         <Separator
@@ -50,6 +51,9 @@ export function DashboardLayoutShell({
                                 </BreadcrumbItem>
                             </BreadcrumbList>
                         </Breadcrumb>
+                    </div>
+                    <div className="flex items-center gap-2 px-4">
+                        <ModeToggle />
                     </div>
                 </header>
                 <div className="flex flex-1 flex-col gap-4 p-4 pt-0 overflow-y-auto">
