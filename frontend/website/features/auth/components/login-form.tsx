@@ -54,7 +54,7 @@ export function LoginForm({
         <div className={cn("flex flex-col gap-6", className)} {...props}>
             <Card>
                 <CardHeader className="text-center">
-                    <CardTitle className="text-xl">Welcome back</CardTitle>
+                    <CardTitle className="text-xl">LMS Platform</CardTitle>
                     <CardDescription>
                         Enter your credentials to access your account
                     </CardDescription>
@@ -74,11 +74,6 @@ export function LoginForm({
                                     className={errors.email ? 'border-destructive' : ''}
 
                                 />
-                                {errors.email && (
-                                    <p className="text-sm text-destructive">
-                                        {errors.email.message}
-                                    </p>
-                                )}
                             </Field>
                             <Field>
                                 <div className="flex items-center">
@@ -113,11 +108,6 @@ export function LoginForm({
                                         )}
                                     </button>
                                 </div>
-                                {errors.password && (
-                                    <p className="text-sm text-destructive">
-                                        {errors.password.message}
-                                    </p>
-                                )}
                             </Field>
                             <Field>
                                 <Button
