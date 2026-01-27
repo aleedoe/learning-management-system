@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Eye, EyeOff, Loader2, UserPlus } from 'lucide-react';
 
@@ -42,7 +42,7 @@ export function RegisterForm() {
         register,
         handleSubmit,
         formState: { errors },
-        watch,
+        control,
     } = useForm<RegisterInput>({
         resolver: zodResolver(registerSchema),
         defaultValues: {
@@ -55,7 +55,7 @@ export function RegisterForm() {
         },
     });
 
-    const selectedRole = watch('role');
+    const selectedRole = useWatch({ control, name: 'role' });
 
     const onSubmit = (data: RegisterInput) => {
         registerUser(data);
