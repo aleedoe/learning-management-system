@@ -21,11 +21,6 @@ import type { NavItem } from "@/components/layout/nav-main"
 
 // This is sample data.
 const data = {
-    user: {
-        name: "shadcn",
-        email: "m@example.com",
-        avatar: "/avatars/shadcn.jpg",
-    },
     teams: [
         {
             name: "Acme Inc",
@@ -59,7 +54,7 @@ export function AppSidebar({ items, ...props }: AppSidebarProps) {
                 <NavMain items={items} />
             </SidebarContent>
             <SidebarFooter>
-                <NavUser user={data.user} />
+                <NavUser />
             </SidebarFooter>
             <SidebarRail />
         </Sidebar>
