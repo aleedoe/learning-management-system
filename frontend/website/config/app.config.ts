@@ -17,11 +17,11 @@ import {
  * Navigation Item Interface
  */
 export interface NavItem {
-    label: string;
-    href: string;
+    title: string;
+    url: string;
     icon: LucideIcon;
     badge?: string | number;
-    children?: NavItem[];
+    items?: NavItem[];
 }
 
 /**
@@ -29,38 +29,38 @@ export interface NavItem {
  */
 export const adminNavItems: NavItem[] = [
     {
-        label: 'Dashboard',
-        href: '/admin',
+        title: 'Dashboard',
+        url: '/admin',
         icon: LayoutDashboard,
     },
     {
-        label: 'Users',
-        href: '/admin/users',
+        title: 'Users',
+        url: '/admin/users',
         icon: Users,
     },
     {
-        label: 'Courses',
-        href: '/admin/courses',
+        title: 'Courses',
+        url: '/admin/courses',
         icon: BookOpen,
     },
     {
-        label: 'Analytics',
-        href: '/admin/analytics',
+        title: 'Analytics',
+        url: '/admin/analytics',
         icon: BarChart3,
     },
     {
-        label: 'Transactions',
-        href: '/admin/transactions',
+        title: 'Transactions',
+        url: '/admin/transactions',
         icon: CreditCard,
     },
     {
-        label: 'Roles & Permissions',
-        href: '/admin/roles',
+        title: 'Roles & Permissions',
+        url: '/admin/roles',
         icon: Shield,
     },
     {
-        label: 'Settings',
-        href: '/admin/settings',
+        title: 'Settings',
+        url: '/admin/settings',
         icon: Settings,
     },
 ];
@@ -70,38 +70,38 @@ export const adminNavItems: NavItem[] = [
  */
 export const instructorNavItems: NavItem[] = [
     {
-        label: 'Dashboard',
-        href: '/instructor',
+        title: 'Dashboard',
+        url: '/instructor',
         icon: LayoutDashboard,
     },
     {
-        label: 'My Courses',
-        href: '/instructor/courses',
+        title: 'My Courses',
+        url: '/instructor/courses',
         icon: BookOpen,
     },
     {
-        label: 'Create Course',
-        href: '/instructor/courses/new',
+        title: 'Create Course',
+        url: '/instructor/courses/new',
         icon: FolderOpen,
     },
     {
-        label: 'Analytics',
-        href: '/instructor/analytics',
+        title: 'Analytics',
+        url: '/instructor/analytics',
         icon: BarChart3,
     },
     {
-        label: 'Earnings',
-        href: '/instructor/earnings',
+        title: 'Earnings',
+        url: '/instructor/earnings',
         icon: CreditCard,
     },
     {
-        label: 'Messages',
-        href: '/instructor/messages',
+        title: 'Messages',
+        url: '/instructor/messages',
         icon: MessageSquare,
     },
     {
-        label: 'Settings',
-        href: '/instructor/settings',
+        title: 'Settings',
+        url: '/instructor/settings',
         icon: Settings,
     },
 ];
@@ -111,33 +111,33 @@ export const instructorNavItems: NavItem[] = [
  */
 export const studentNavItems: NavItem[] = [
     {
-        label: 'Dashboard',
-        href: '/student',
+        title: 'Dashboard',
+        url: '/student',
         icon: LayoutDashboard,
     },
     {
-        label: 'Browse Courses',
-        href: '/student/browse',
+        title: 'Browse Courses',
+        url: '/student/browse',
         icon: BookOpen,
     },
     {
-        label: 'My Courses',
-        href: '/student/my-courses',
+        title: 'My Courses',
+        url: '/student/my-courses',
         icon: GraduationCap,
     },
     {
-        label: 'Progress',
-        href: '/student/progress',
+        title: 'Progress',
+        url: '/student/progress',
         icon: BarChart3,
     },
     {
-        label: 'Notifications',
-        href: '/student/notifications',
+        title: 'Notifications',
+        url: '/student/notifications',
         icon: Bell,
     },
     {
-        label: 'Settings',
-        href: '/student/settings',
+        title: 'Settings',
+        url: '/student/settings',
         icon: Settings,
     },
 ];
