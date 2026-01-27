@@ -1,14 +1,14 @@
-import { dashboardNav } from "@/config/dashboard-nav";
-import { DashboardShell } from "@/components/layout/dashboard-shell";
+import { DashboardLayoutShell } from "@/components/layout/dashboard-layout-shell"
+import { adminNavItems } from "@/config/app.config"
 
-export default function AdminLayout({
+export default function Layout({
     children,
-}: {
+}: Readonly<{
     children: React.ReactNode;
-}) {
+}>) {
     return (
-        <DashboardShell navItems={dashboardNav.admin}>
+        <DashboardLayoutShell navItems={adminNavItems}>
             {children}
-        </DashboardShell>
-    );
+        </DashboardLayoutShell>
+    )
 }

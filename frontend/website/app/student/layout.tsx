@@ -1,14 +1,14 @@
-import { dashboardNav } from "@/config/dashboard-nav";
-import { DashboardShell } from "@/components/layout/dashboard-shell";
+import { DashboardLayoutShell } from "@/components/layout/dashboard-layout-shell"
+import { studentNavItems } from "@/config/app.config"
 
-export default function StudentLayout({
+export default function Layout({
     children,
-}: {
+}: Readonly<{
     children: React.ReactNode;
-}) {
+}>) {
     return (
-        <DashboardShell navItems={dashboardNav.student}>
+        <DashboardLayoutShell navItems={studentNavItems}>
             {children}
-        </DashboardShell>
-    );
+        </DashboardLayoutShell>
+    )
 }

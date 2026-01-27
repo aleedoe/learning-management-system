@@ -1,16 +1,14 @@
-"use client"
+import { DashboardLayoutShell } from "@/components/layout/dashboard-layout-shell"
+import { instructorNavItems } from "@/config/app.config"
 
-import { DashboardShell } from "@/components/layout/dashboard-shell"
-import { instructorNavItems } from "@/config/dashboard-nav"
-
-export default function InstructorLayout({
+export default function Layout({
     children,
-}: {
-    children: React.ReactNode
-}) {
+}: Readonly<{
+    children: React.ReactNode;
+}>) {
     return (
-        <DashboardShell navItems={instructorNavItems}>
+        <DashboardLayoutShell navItems={instructorNavItems}>
             {children}
-        </DashboardShell>
+        </DashboardLayoutShell>
     )
 }

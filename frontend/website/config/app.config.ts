@@ -1,27 +1,12 @@
-import {
-    LayoutDashboard,
-    Users,
-    BookOpen,
-    Settings,
-    BarChart3,
-    GraduationCap,
-    FolderOpen,
-    MessageSquare,
-    CreditCard,
-    Bell,
-    Shield,
-    type LucideIcon,
-} from 'lucide-react';
-
 /**
  * Navigation Item Interface
  */
 export interface NavItem {
-    label: string;
-    href: string;
-    icon: LucideIcon;
+    title: string;
+    url: string;
+    icon: string; // Using string identifiers for serialization
     badge?: string | number;
-    children?: NavItem[];
+    items?: NavItem[];
 }
 
 /**
@@ -29,39 +14,39 @@ export interface NavItem {
  */
 export const adminNavItems: NavItem[] = [
     {
-        label: 'Dashboard',
-        href: '/admin',
-        icon: LayoutDashboard,
+        title: 'Dashboard',
+        url: '/admin',
+        icon: 'LayoutDashboard',
     },
     {
-        label: 'Users',
-        href: '/admin/users',
-        icon: Users,
+        title: 'Users',
+        url: '/admin/users',
+        icon: 'Users',
     },
     {
-        label: 'Courses',
-        href: '/admin/courses',
-        icon: BookOpen,
+        title: 'Courses',
+        url: '/admin/courses',
+        icon: 'BookOpen',
     },
     {
-        label: 'Analytics',
-        href: '/admin/analytics',
-        icon: BarChart3,
+        title: 'Analytics',
+        url: '/admin/analytics',
+        icon: 'BarChart3',
     },
     {
-        label: 'Transactions',
-        href: '/admin/transactions',
-        icon: CreditCard,
+        title: 'Transactions',
+        url: '/admin/transactions',
+        icon: 'CreditCard',
     },
     {
-        label: 'Roles & Permissions',
-        href: '/admin/roles',
-        icon: Shield,
+        title: 'Roles & Permissions',
+        url: '/admin/roles',
+        icon: 'Shield',
     },
     {
-        label: 'Settings',
-        href: '/admin/settings',
-        icon: Settings,
+        title: 'Settings',
+        url: '/admin/settings',
+        icon: 'Settings',
     },
 ];
 
@@ -70,39 +55,39 @@ export const adminNavItems: NavItem[] = [
  */
 export const instructorNavItems: NavItem[] = [
     {
-        label: 'Dashboard',
-        href: '/instructor',
-        icon: LayoutDashboard,
+        title: 'Dashboard',
+        url: '/instructor',
+        icon: 'LayoutDashboard',
     },
     {
-        label: 'My Courses',
-        href: '/instructor/courses',
-        icon: BookOpen,
+        title: 'My Courses',
+        url: '/instructor/courses',
+        icon: 'BookOpen',
     },
     {
-        label: 'Create Course',
-        href: '/instructor/courses/new',
-        icon: FolderOpen,
+        title: 'Create Course',
+        url: '/instructor/courses/new',
+        icon: 'FolderOpen',
     },
     {
-        label: 'Analytics',
-        href: '/instructor/analytics',
-        icon: BarChart3,
+        title: 'Analytics',
+        url: '/instructor/analytics',
+        icon: 'BarChart3',
     },
     {
-        label: 'Earnings',
-        href: '/instructor/earnings',
-        icon: CreditCard,
+        title: 'Earnings',
+        url: '/instructor/earnings',
+        icon: 'CreditCard',
     },
     {
-        label: 'Messages',
-        href: '/instructor/messages',
-        icon: MessageSquare,
+        title: 'Messages',
+        url: '/instructor/messages',
+        icon: 'MessageSquare',
     },
     {
-        label: 'Settings',
-        href: '/instructor/settings',
-        icon: Settings,
+        title: 'Settings',
+        url: '/instructor/settings',
+        icon: 'Settings',
     },
 ];
 
@@ -111,34 +96,34 @@ export const instructorNavItems: NavItem[] = [
  */
 export const studentNavItems: NavItem[] = [
     {
-        label: 'Dashboard',
-        href: '/student',
-        icon: LayoutDashboard,
+        title: 'Dashboard',
+        url: '/student',
+        icon: 'LayoutDashboard',
     },
     {
-        label: 'Browse Courses',
-        href: '/student/browse',
-        icon: BookOpen,
+        title: 'Browse Courses',
+        url: '/student/browse',
+        icon: 'BookOpen',
     },
     {
-        label: 'My Courses',
-        href: '/student/my-courses',
-        icon: GraduationCap,
+        title: 'My Courses',
+        url: '/student/my-courses',
+        icon: 'GraduationCap',
     },
     {
-        label: 'Progress',
-        href: '/student/progress',
-        icon: BarChart3,
+        title: 'Progress',
+        url: '/student/progress',
+        icon: 'BarChart3',
     },
     {
-        label: 'Notifications',
-        href: '/student/notifications',
-        icon: Bell,
+        title: 'Notifications',
+        url: '/student/notifications',
+        icon: 'Bell',
     },
     {
-        label: 'Settings',
-        href: '/student/settings',
-        icon: Settings,
+        title: 'Settings',
+        url: '/student/settings',
+        icon: 'Settings',
     },
 ];
 
