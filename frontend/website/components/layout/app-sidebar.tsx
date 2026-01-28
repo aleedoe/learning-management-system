@@ -3,42 +3,24 @@
 import * as React from "react"
 import {
     AudioWaveform,
+    BanIcon,
     Command,
     GalleryVerticalEnd,
 } from "lucide-react"
 
 import { NavMain } from "@/components/layout/nav-main"
 import { NavUser } from "@/components/layout/nav-user"
-import { TeamSwitcher } from "@/components/layout/team-switcher"
 import {
     Sidebar,
     SidebarContent,
     SidebarFooter,
     SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
     SidebarRail,
 } from "@/components/ui/sidebar"
 import type { NavItem } from "@/components/layout/nav-main"
-
-// This is sample data.
-const data = {
-    teams: [
-        {
-            name: "Acme Inc",
-            logo: GalleryVerticalEnd,
-            plan: "Enterprise",
-        },
-        {
-            name: "Acme Corp.",
-            logo: AudioWaveform,
-            plan: "Startup",
-        },
-        {
-            name: "Evil Corp.",
-            logo: Command,
-            plan: "Free",
-        },
-    ],
-}
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
     items: NavItem[]
@@ -48,7 +30,19 @@ export function AppSidebar({ items, ...props }: AppSidebarProps) {
     return (
         <Sidebar collapsible="icon" className="bg-sidebar text-sidebar-foreground" {...props}>
             <SidebarHeader>
-                <TeamSwitcher teams={data.teams} />
+                <SidebarMenu>
+                    <SidebarMenuItem>
+                        <SidebarMenuButton
+                            asChild
+                            className="data-[slot=sidebar-menu-button]:p-1.5!"
+                        >
+                            <a href="#">
+                                <BanIcon className="size-5!" />
+                                <span className="text-base font-semibold">Acme Inc.</span>
+                            </a>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                </SidebarMenu>
             </SidebarHeader>
             <SidebarContent>
                 <NavMain items={items} />
