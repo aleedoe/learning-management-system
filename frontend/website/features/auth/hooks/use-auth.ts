@@ -153,11 +153,11 @@ export function useLogout() {
 function getRedirectPath(role: User['role']): string {
     switch (role) {
         case 'ADMIN':
-            return '/admin/dashboard';
+            return '/admin';
         case 'INSTRUCTOR':
-            return '/instructor/dashboard';
+            return '/instructor';
         case 'STUDENT':
-            return '/student/dashboard';
+            return '/student';
         default:
             return '/';
     }
