@@ -62,7 +62,7 @@ export function RegisterForm() {
     };
 
     return (
-        <Card className="w-full max-w-md mx-auto shadow-lg">
+        <Card className="w-full max-w-md mx-auto shadow-lg bg-card text-card-foreground">
             <CardHeader className="space-y-1 text-center">
                 <CardTitle className="text-2xl font-bold tracking-tight">
                     Create Account
@@ -277,7 +277,7 @@ export function RegisterForm() {
                         Already have an account?{' '}
                         <Link
                             href="/login"
-                            className="font-medium text-primary hover:underline"
+                            className="font-medium text-primary hover:text-primary/80 hover:underline"
                         >
                             Sign in
                         </Link>

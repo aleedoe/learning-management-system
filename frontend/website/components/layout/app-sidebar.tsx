@@ -46,7 +46,7 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
 
 export function AppSidebar({ items, ...props }: AppSidebarProps) {
     return (
-        <Sidebar collapsible="icon" {...props}>
+        <Sidebar collapsible="icon" className="bg-sidebar text-sidebar-foreground" {...props}>
             <SidebarHeader>
                 <TeamSwitcher teams={data.teams} />
             </SidebarHeader>
