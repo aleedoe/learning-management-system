@@ -2,10 +2,7 @@
 
 import * as React from "react"
 import {
-    AudioWaveform,
     BanIcon,
-    Command,
-    GalleryVerticalEnd,
 } from "lucide-react"
 
 import { NavMain } from "@/components/layout/nav-main"
